@@ -40,3 +40,10 @@ jobs:
       - name: List files
         run: ls -l
 
+      - name: Build Docker image
+        run: docker build -t cal-app .
+
+      - name: Run Docker container
+        run: |
+         docker run -d --name cal-container cal-app
+
