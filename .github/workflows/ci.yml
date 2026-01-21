@@ -36,3 +36,7 @@ jobs:
 
       - name: Package JAR
         run: jar cfe cal.jar cal cal.class
+    
+      - name: List files
+        run: ls -l
+
