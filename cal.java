@@ -2,6 +2,22 @@ import java.util.Scanner;
 
 public class cal {
 
+    // ✅ THIS METHOD IS REQUIRED FOR UNIT TESTS
+    public static double calculate(double a, double b, char op) {
+        switch (op) {
+            case '+': return a + b;
+            case '-': return a - b;
+            case '*': return a * b;
+            case '/':
+                if (b == 0) {
+                    throw new IllegalArgumentException("Division by zero");
+                }
+                return a / b;
+            default:
+                throw new IllegalArgumentException("Invalid operator");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -16,31 +32,9 @@ public class cal {
         System.out.print("Enter second number: ");
         double b = sc.nextDouble();
 
-        double result;
-
-        switch (op) {
-            case '+':
-                result = a + b;
-                break;
-            case '-':
-                result = a - b;
-                break;
-            case '*':
-                result = a * b;
-                break;
-            case '/':
-                if (b == 0) {
-                    System.out.println("Error: Division by zero");
-                    return;
-                }
-                result = a / b;
-                break;
-            default:
-                System.out.println("Invalid operator");
-                return;
-        }
-
+        double result = calculate(a, b, op);
         System.out.println("Result: " + result);
+
         sc.close();
     }
 }
