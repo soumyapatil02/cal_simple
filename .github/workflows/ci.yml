@@ -1,13 +1,12 @@
-name: Java CI - Build and Test
+name: Java CI - Build, Test, Package
 
 on:
   push:
-    branches: [ "master"]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "maser" ]
+    branches: [ "master" ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
@@ -21,13 +20,19 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Download JUnit
+        run: |
+          curl -L -o junit-platform-console-standalone.jar \
+          https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.1/junit-platform-console-standalone-1.10.1.jar
 
-      - name: Build and run unit tests
-        run: mvn clean verify
+      - name: Compile source
+        run: javac cal.java
+
+      - name: Compile tests
+        run: javac -cp .:junit-platform-console-standalone.jar calTest.java
+
+      - name: Run unit tests
+        run: java -jar junit-platform-console-standalone.jar -cp . --scan-class-path
+
+      - name: Package JAR
+        run: jar cfe cal.jar cal cal.class
