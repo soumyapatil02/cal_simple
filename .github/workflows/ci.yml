@@ -21,7 +21,7 @@ jobs:
           java-version: '17'
 
       - name: Compile Java file
-        run: javac Calculator.java
+        run: javac cal.java
 
       - name: Run Calculator
         run: |
