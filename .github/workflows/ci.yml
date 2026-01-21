@@ -2,12 +2,12 @@ name: Java CI - Build and Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master"]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "maser" ]
 
 jobs:
-    
+
   build:
     runs-on: ubuntu-latest
 
