@@ -25,4 +25,4 @@ jobs:
 
       - name: Run Calculator
         run: |
-          echo -e "8\n*\n4" | java Calculator
+          echo -e "8\n*\n4" | java cal
